@@ -1,5 +1,51 @@
 @import "tailwindcss";
 
+@theme {
+  --font-medieval: 'MedievalSharp';
+  --font-jakarta: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-code: 'Fira Code', 'JetBrains Mono', monospace;
+
+  --color-zoltraak: #3674B5;
+  --color-cream: #FDFBF7;
+  --color-cream-soft: #F5F2EB;
+  --color-bg-landing: #0A0A0A;
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.6;
+    }
+    80% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(-110vh) scale(1.2);
+      opacity: 0;
+    }
+  }
+}
+
+.particle {
+  position: absolute;
+  bottom: -10px;
+  background-color: var(--color-zoltraak);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatUp linear infinite;
+}
+
+@keyframes rotateSpellCircle {
+  from {
+    transform: translateX(-50%) rotateX(62deg) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotateX(62deg) rotate(360deg);
+  }
+}
+
 /* AI-zeru global styles */
 :root {
   --bg-primary: #080c12;

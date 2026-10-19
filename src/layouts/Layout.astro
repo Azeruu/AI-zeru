@@ -25,7 +25,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;700&family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=MedievalSharp&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=UnifrakturMaguntia&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -68,16 +68,24 @@ const {
     --tl-green: #28c840;
 
     /* Typography */
-    --font-sans: 'Inter', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
     --font-display: 'Cinzel', serif;
+    --font-gothic: 'UnifrakturMaguntia', 'MedievalSharp', 'Cinzel Decorative', cursive, serif;
+    --font-modern: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Zoltraak Blue & Cream User Theme */
+    --bg-pure: #000000;
+    --bg-dark: #0a0a0a;
+    --accent-zoltraak: #3674B5;
+    --accent-zoltraak-glow: rgba(54, 116, 181, 0.45);
+    --accent-zoltraak-soft: rgba(54, 116, 181, 0.15);
+    --color-cream: #FDFBF7;
+    --color-cream-soft: #F5F2EB;
   }
 
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  /* Reset * / margin / padding sudah ditangani Preflight Tailwind (@layer base).
+     Jangan tambahkan reset unlayered di sini, karena akan menimpa utility seperti p-*, m-*. */
 
   html {
     font-family: var(--font-sans);
