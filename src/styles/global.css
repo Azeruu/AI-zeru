@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* AI-zeru global styles */
+:root {
+  --bg-primary: #080c12;
+  --bg-secondary: #0d1117;
+  --bg-tertiary: #111827;
+  --bg-glass: rgba(13, 17, 23, 0.75);
+  --bg-glass-light: rgba(30, 41, 59, 0.4);
+  --accent-primary: #00d4ff;
+  --accent-secondary: #0ea5e9;
+  --accent-glow: rgba(0, 212, 255, 0.35);
+  --accent-glow-soft: rgba(0, 212, 255, 0.12);
+  --accent-silver: #94a3b8;
+  --accent-rune: #7c3aed;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --text-accent: #00d4ff;
+  --border-subtle: rgba(148, 163, 184, 0.08);
+  --border-medium: rgba(148, 163, 184, 0.15);
+  --border-accent: rgba(0, 212, 255, 0.3);
+  --tl-red: #ff5f57;
+  --tl-yellow: #febc2e;
+  --tl-green: #28c840;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Cinzel', serif;
+}

@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ChatApp from '../components/ChatApp';
+
+const user = await Astro.locals.currentUser();
+
+if (!user) {
+  return Astro.redirect('/sign-in');
+}
+
+const userInfo = {
+  id: user.id,
+  firstName: user.firstName ?? 'Spellcaster',
+  lastName: user.lastName ?? '',
+  email: user.emailAddresses[0]?.emailAddress ?? '',
+  imageUrl: user.imageUrl,
+};
+---
+
+<Layout title="Dashboard — AI-zeru Spellroom">
+  <ChatApp client:load userInfo={userInfo} />
+</Layout>

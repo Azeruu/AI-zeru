@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Signing Out — AI-zeru">
+  <main class="sign-out-container">
+    <div class="sign-out-card window-frame">
+      <div class="spinner">🔮</div>
+      <p class="mono-text">Departing the realm...</p>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const performSignOut = async () => {
+    const clerk = (window as any).Clerk;
+    if (clerk?.signOut) {
+      await clerk.signOut({ redirectUrl: '/' });
+      return;
+    }
+
+    window.addEventListener('clerk:loaded', async () => {
+      await (window as any).Clerk?.signOut({ redirectUrl: '/' });
+    });
+
+    const interval = setInterval(async () => {
+      const c = (window as any).Clerk;
+      if (c?.signOut) {
+        clearInterval(interval);
+        await c.signOut({ redirectUrl: '/' });
+      }
+    }, 100);
+  };
+
+  performSignOut();
+</script>
+
+<style>
+  .sign-out-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+  }
+
+  .sign-out-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .spinner {
+    font-size: 2.5rem;
+    animation: pulse 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+</style>
+

@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'AI-zeru — Zoltraak Spellcasting AI Terminal', 
+  description = 'AI-zeru is a dark-mode medieval fantasy AI chatbot powered by Groq Llama-3.3-70b, featuring a macOS-style glassmorphism interface.' 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0d1117" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    /* Core palette */
+    --bg-primary: #080c12;
+    --bg-secondary: #0d1117;
+    --bg-tertiary: #111827;
+    --bg-glass: rgba(13, 17, 23, 0.75);
+    --bg-glass-light: rgba(30, 41, 59, 0.4);
+
+    /* Zoltraak accent - cyan electric */
+    --accent-primary: #00d4ff;
+    --accent-secondary: #0ea5e9;
+    --accent-glow: rgba(0, 212, 255, 0.35);
+    --accent-glow-soft: rgba(0, 212, 255, 0.12);
+    --accent-silver: #94a3b8;
+    --accent-rune: #7c3aed;
+
+    /* Text */
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #475569;
+    --text-accent: #00d4ff;
+
+    /* Borders */
+    --border-subtle: rgba(148, 163, 184, 0.08);
+    --border-medium: rgba(148, 163, 184, 0.15);
+    --border-accent: rgba(0, 212, 255, 0.3);
+
+    /* Traffic lights */
+    --tl-red: #ff5f57;
+    --tl-yellow: #febc2e;
+    --tl-green: #28c840;
+
+    /* Typography */
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-display: 'Cinzel', serif;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(14, 165, 233, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-secondary);
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--accent-glow);
+    color: var(--text-primary);
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SignUp } from '@clerk/astro/components';
+---
+
+<Layout title="Sign Up — AI-zeru">
+  <main class="auth-wrapper">
+    <div class="auth-window window-frame">
+      <div class="title-bar">
+        <div class="traffic-lights">
+          <span class="tl tl-red"></span>
+          <span class="tl tl-yellow"></span>
+          <span class="tl tl-green"></span>
+        </div>
+        <span class="title-text mono-text">aizeru — new grimoire</span>
+        <div class="spacer"></div>
+      </div>
+      <div class="auth-content">
+        <div class="auth-header">
+          <span class="auth-glyph">✦</span>
+          <h1 class="auth-title">Create Grimoire</h1>
+          <p class="auth-subtitle mono-text">Bind your soul to the Zoltraak realm</p>
+        </div>
+        <SignUp />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .window-frame {
+    background: var(--bg-glass);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--border-accent);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 60px var(--accent-glow-soft);
+    animation: windowAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    width: 100%;
+    max-width: 460px;
+  }
+
+  @keyframes windowAppear {
+    from { opacity: 0; transform: scale(0.95) translateY(15px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .title-bar {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid var(--border-subtle);
+    gap: 0.75rem;
+  }
+
+  .traffic-lights { display: flex; gap: 8px; }
+
+  .tl {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .tl-red { background-color: var(--tl-red); }
+  .tl-yellow { background-color: var(--tl-yellow); }
+  .tl-green { background-color: var(--tl-green); }
+
+  .title-text {
+    flex: 1;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .spacer { width: 52px; }
+  .mono-text { font-family: var(--font-mono); }
+
+  .auth-content {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .auth-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .auth-glyph {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.6));
+    color: #a78bfa;
+  }
+
+  .auth-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .auth-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+</style>
