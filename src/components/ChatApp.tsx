@@ -21,14 +21,16 @@ interface ModelOption {
 }
 
 const DEFAULT_MODELS: ModelOption[] = [
-  { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Versatile)', badge: 'Best' },
+  { id: 'openai/gpt-oss-20b', name: 'GPT-OSS 20B (OpenAI)', badge: 'Default' },
+  { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Versatile)', badge: 'Versatile' },
   { id: 'deepseek-r1-distill-llama-70b', name: 'DeepSeek R1 (Reasoning)', badge: 'Reasoning' },
   { id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B Instant', badge: 'Fast' },
   { id: 'gemma2-9b-it', name: 'Gemma 2 9B (Google)', badge: 'Balanced' },
 ];
 
 function formatEngineBadge(id: string): string {
-  if (!id) return 'Llama-3.3-70b';
+  if (!id) return 'GPT-OSS-20b';
+  if (id.includes('gpt-oss-20b')) return 'GPT-OSS-20b';
   if (id.includes('llama-3.3-70b')) return 'Llama-3.3-70b';
   if (id.includes('llama-3.1-70b')) return 'Llama-3.1-70b';
   if (id.includes('llama-3.1-8b')) return 'Llama-3.1-8b';
@@ -53,7 +55,7 @@ export default function ChatApp({ userInfo }: ChatAppProps) {
   const [streamingContent, setStreamingContent] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [availableModels, setAvailableModels] = useState<ModelOption[]>(DEFAULT_MODELS);
-  const [currentModel, setCurrentModel] = useState<string>('llama-3.3-70b-versatile');
+  const [currentModel, setCurrentModel] = useState<string>('openai/gpt-oss-20b');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -423,7 +425,7 @@ export default function ChatApp({ userInfo }: ChatAppProps) {
                   <h2 className="empty-title">Summon AI-zeru</h2>
                   <p className="empty-desc">
                     Type your spell below to begin. Channel the arcane power of{' '}
-                    <strong>Groq Llama-3.3-70b-versatile</strong> — the fastest AI in the realm.
+                    <strong>Groq openai/gpt-oss-20b</strong> — the fastest AI in the realm.
                   </p>
                   <div className="empty-suggestions">
                     {[

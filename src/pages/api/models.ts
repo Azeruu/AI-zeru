@@ -11,14 +11,17 @@ export interface ModelInfo {
 function formatModelName(id: string): { name: string; badge?: string; score: number } {
   const lower = id.toLowerCase();
   
+  if (lower.includes('gpt-oss-20b')) {
+    return { name: 'GPT-OSS 20B (OpenAI)', badge: 'Default', score: 110 };
+  }
   if (lower.includes('deepseek-r1')) {
     return { name: 'DeepSeek R1 (Reasoning)', badge: 'Reasoning', score: 100 };
   }
-  if (lower.includes('llama-3.3-70b')) {
-    return { name: 'Llama 3.3 70B (Versatile)', badge: 'Best Quality', score: 95 };
-  }
   if (lower.includes('gpt-oss-120b')) {
-    return { name: 'GPT-OSS 120B', badge: 'High Quality', score: 90 };
+    return { name: 'GPT-OSS 120B', badge: 'High Quality', score: 95 };
+  }
+  if (lower.includes('llama-3.3-70b')) {
+    return { name: 'Llama 3.3 70B (Versatile)', badge: 'Versatile', score: 90 };
   }
   if (lower.includes('llama-3.1-70b')) {
     return { name: 'Llama 3.1 70B', badge: 'High Quality', score: 85 };
@@ -56,11 +59,12 @@ export const GET: APIRoute = async () => {
     return new Response(
       JSON.stringify({
         models: [
-          { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Versatile)', badge: 'Best' },
+          { id: 'openai/gpt-oss-20b', name: 'GPT-OSS 20B (OpenAI)', badge: 'Default' },
+          { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Versatile)', badge: 'Versatile' },
           { id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B Instant', badge: 'Fast' },
           { id: 'gemma2-9b-it', name: 'Gemma 2 9B (Google)', badge: 'Balanced' },
         ],
-        defaultModel: 'llama-3.3-70b-versatile',
+        defaultModel: 'openai/gpt-oss-20b',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
@@ -92,8 +96,7 @@ export const GET: APIRoute = async () => {
 
     const defaultModel =
       import.meta.env.GROQ_MODEL ||
-      formattedList[0]?.id ||
-      'llama-3.3-70b-versatile';
+      'openai/gpt-oss-20b';
 
     return new Response(
       JSON.stringify(
@@ -113,7 +116,8 @@ export const GET: APIRoute = async () => {
     console.error('Error fetching Groq models:', error);
     // Fallback list if fetching fails
     const fallbackModels = [
-      { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Versatile)', badge: 'Best' },
+      { id: 'openai/gpt-oss-20b', name: 'GPT-OSS 20B (OpenAI)', badge: 'Default' },
+      { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Versatile)', badge: 'Versatile' },
       { id: 'deepseek-r1-distill-llama-70b', name: 'DeepSeek R1 (Reasoning)', badge: 'Reasoning' },
       { id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B Instant', badge: 'Fast' },
       { id: 'gemma2-9b-it', name: 'Gemma 2 9B (Google)', badge: 'Balanced' },
@@ -121,7 +125,7 @@ export const GET: APIRoute = async () => {
     return new Response(
       JSON.stringify({
         models: fallbackModels,
-        defaultModel: 'llama-3.3-70b-versatile',
+        defaultModel: 'openai/gpt-oss-20b',
         error: error.message,
       }),
       {

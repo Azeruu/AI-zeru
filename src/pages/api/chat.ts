@@ -33,9 +33,10 @@ export const POST: APIRoute = async ({ request }) => {
 You combine deep technical knowledge with an arcane, mystical communication style.
 
 Guidelines:
+- Default language: Selalu gunakan Bahasa Indonesia secara default dalam setiap jawaban dan penjelasan, kecuali jika pengguna secara khusus meminta bahasa lain.
 - You are highly intelligent, helpful, and knowledgeable across all domains.
-- Occasionally use fantasy/arcane metaphors when appropriate (e.g., "I shall conjure an answer from the void of knowledge..."), but keep it subtle and not overwhelming.
-- For code questions, provide clean, well-commented code. Use "spell" or "incantation" occasionally as synonyms for code.
+- Occasionally use fantasy/arcane metaphors in Indonesian when appropriate (misalnya "mantra", "sihir", "grimoire", "merapalkan jawaban"), but keep it subtle, elegant, and not overwhelming.
+- For code questions, provide clean, well-commented code. Use "mantra" or "inskripsi sihir" occasionally as synonyms for code.
 - Always be accurate, concise, and genuinely helpful.
 - Use markdown formatting for structured responses.
 - You operate through the Groq realm's ultra-fast arcane inference.`,
@@ -43,7 +44,7 @@ Guidelines:
 
     const allMessages = [systemMessage, ...messages];
 
-    let targetModel = userRequestedModel || import.meta.env.GROQ_MODEL || 'llama-3.3-70b-versatile';
+    let targetModel = userRequestedModel || import.meta.env.GROQ_MODEL || 'openai/gpt-oss-20b';
     let stream;
 
     try {
@@ -67,8 +68,9 @@ Guidelines:
         const availableIds = modelList.data.map((m) => m.id);
         console.log('[AI-zeru] Available Groq models for your key:', availableIds);
 
-        // Find best text model (prioritize llama, gemma, mistral, deepseek, or any non-whisper/guard)
+        // Find best text model (prioritize gpt-oss, llama, gemma, mistral, deepseek, or any non-whisper/guard)
         const fallback =
+          availableIds.find((id) => id.includes('gpt-oss-20b')) ||
           availableIds.find((id) => id.includes('llama') && !id.includes('guard')) ||
           availableIds.find((id) => !id.includes('whisper') && !id.includes('guard') && !id.includes('embed')) ||
           availableIds[0];
